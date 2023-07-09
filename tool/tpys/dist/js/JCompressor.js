@@ -8,7 +8,7 @@ openobj.ChangeBefore();var 文件=_this.文件;var isMultiple=_this.hasAttribute
 if(isMultiple){var fileArr=[];var fileBase64Arr=[];for(var i=0;i<files.length;i++){ProcessingFn(文件[i]);}}else{ProcessingFn(文件[0]);}
 function ProcessingFn(file){if(file.size>opts.MaxSize){FileEmpty(function(){alert('上传文件大小不能超过'+opts.MaxSize+'B，请重新上传！');});return false;}
 if(!opts.IsImg){return false;}
-if(!/(jp|jpe|pn)g$/.test(file.name)){FileEmpty(function(){alert('图片格式错误，请重新上传！');});return false;}
+if(!/(jp|jpe|pn)g$|^(JP|JPE|PN)G$/.test(file.name)){FileEmpty(function(){alert('图片格式错误，请重新上传！');});return false;}
 if(opts.IsCompress){if(file.size<opts.MaxCompressSize){FileReady(file);return false;}else{CompressorFn(file);}}else{FileReady(file);}}
 function FileReady(filedata){if(isMultiple){fileArr.push(filedata);BlobToBase64(filedata,function(result){fileBase64Arr.push(result);if(fileBase64Arr.length==files.length){fileLoad(fileArr,fileBase64Arr);}});}else{BlobToBase64(filedata,function(result){fileLoad(filedata,result);});}
 function fileLoad(filedata，filebase64){if(opts.IsPreview){openobj.ImgPreview(filebase64);}
