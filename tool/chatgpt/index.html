@@ -11,7 +11,7 @@
     <style>
         * {
             box-sizing: border-box;
-            font-family: -apple-system， BlinkMacSystemFont， "Segoe UI"， "Noto Sans"， Helvetica， Arial， sans-serif， "Apple Color Emoji"， "Segoe UI Emoji" !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
         }
 
         html {
@@ -26,7 +26,7 @@
             margin: 0;
         }
 
-        。chat_window {
+        .chat_window {
             position: absolute;
             width: 100%;
             max-width: 1100px;
@@ -37,8 +37,8 @@
             left: 50%;
             top: 50%;
             overflow: hidden;
-            transform: translate(-50%， -50%);
-            box-shadow: 0 10px 20px rgba(0， 0， 0， 0.15);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
         .top_menu {
@@ -68,7 +68,7 @@
             height: 4px;
             border-radius: 4px;
             position: absolute;
-            pointer-events: 无;
+            pointer-events: none;
         }
 
         .top_menu .toggler .button.close {
@@ -100,45 +100,45 @@
             overflow-y: auto;
         }
 
-        .messages::-webkit-scrollbar，
-        #chatlog .markdown-body>pre::-webkit-scrollbar，
-        #setDialog::-webkit-scrollbar，
+        .messages::-webkit-scrollbar,
+        #chatlog .markdown-body>pre::-webkit-scrollbar,
+        #setDialog::-webkit-scrollbar,
         #chatList::-webkit-scrollbar {
             width: 10px;
             height: 10px;
         }
 
-        .messages::-webkit-scrollbar-track，
-        #chatlog .response>pre::-webkit-scrollbar-track，
-        #setDialog::-webkit-scrollbar-track，
+        .messages::-webkit-scrollbar-track,
+        #chatlog .response>pre::-webkit-scrollbar-track,
+        #setDialog::-webkit-scrollbar-track,
         #chatList::-webkit-scrollbar-track {
             background-clip: padding-box;
             background: transparent;
-            border: 无;
+            border: none;
         }
 
-        .messages::-webkit-scrollbar-corner，
-        #chatlog .response>pre::-webkit-scrollbar-corner，
-        #setDialog::-webkit-scrollbar-corner，
+        .messages::-webkit-scrollbar-corner,
+        #chatlog .response>pre::-webkit-scrollbar-corner,
+        #setDialog::-webkit-scrollbar-corner,
         #chatList::-webkit-scrollbar-corner {
             background-color: transparent;
         }
 
-        .messages::-webkit-scrollbar-thumb，
-        #chatlog .response>pre::-webkit-scrollbar-thumb，
-        #setDialog::-webkit-scrollbar-thumb，
+        .messages::-webkit-scrollbar-thumb,
+        #chatlog .response>pre::-webkit-scrollbar-thumb,
+        #setDialog::-webkit-scrollbar-thumb,
         #chatList::-webkit-scrollbar-thumb {
-            background-color: rgba(0， 0， 0， 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
             background-clip: padding-box;
             border: solid transparent;
             border-radius: 10px;
         }
 
-        .messages::-webkit-scrollbar-thumb:hover，
-        #chatlog .response>pre::-webkit-scrollbar-thumb:hover，
-        #setDialog::-webkit-scrollbar-thumb:hover，
+        .messages::-webkit-scrollbar-thumb:hover,
+        #chatlog .response>pre::-webkit-scrollbar-thumb:hover,
+        #setDialog::-webkit-scrollbar-thumb:hover,
         #chatList::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(0， 0， 0， 0.4);
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
         .messages .message {
@@ -214,7 +214,7 @@
             overflow-x: auto;
             padding: 10px;
             position: relative;
-            background: rgba(180， 180， 180， 0.1);
+            background: rgba(180, 180, 180, 0.1);
         }
 
         .m-mdic-copy-wrapper {
@@ -241,13 +241,13 @@
             padding: 3px 6px;
             border: 0;
             border-radius: 3px;
-            background: 无;
+            background: none;
             font-family: system-ui;
             font-size: 12px;
             line-height: 18px;
             color: #555;
             opacity: 0.3;
-            outline: 无;
+            outline: none;
             opacity: 1;
             right: 100%;
             padding-right: 4px;
@@ -260,7 +260,7 @@
             padding: 3px 6px;
             border: 0;
             border-radius: 3px;
-            background: 无;
+            background: none;
             font-family: system-ui;
             font-size: 12px;
             line-height: 18px;
@@ -276,7 +276,7 @@
         }
 
         #stopChat {
-            display: 无;
+            display: none;
             margin: 0 auto;
             margin-top: 3px;
             width: 80px;
@@ -311,7 +311,7 @@
         }
 
         .bottom_wrapper .message_input_wrapper {
-            border: 无;
+            border: none;
             width: calc(100% - 143px);
             position: relative;
             text-align: left;
@@ -319,9 +319,9 @@
 
         .bottom_wrapper .message_input_wrapper .message_input_text {
             border-radius: 4px;
-            border: 无;
-            outline: 无;
-            resize: 无;
+            border: none;
+            outline: none;
+            resize: none;
             background: #f6f6f6;
             color: #24292f;
             height: 47px;
@@ -338,7 +338,7 @@
         }
 
         .bottom_wrapper .message_input_wrapper .message_input_text::-webkit-scrollbar {
-            display: 无;
+            display: none;
             width: 0;
             height: 0;
         }
@@ -350,7 +350,7 @@
             font-weight: bold;
             border-radius: 3px;
             background-color: #b8da8b;
-            border: 无;
+            border: none;
             padding: 0;
             color: #fff;
             cursor: pointer;
@@ -445,7 +445,7 @@
             height: 16px;
             border-radius: 100%;
             background: #fff;
-            box-shadow: 0 1px 1px rgba(0， 0， 0， .1);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
             position: absolute;
             left: 1px;
             top: 1px;
@@ -470,7 +470,7 @@
             top: 5px;
             cursor: pointer;
             padding: 5px;
-            border: 无;
+            border: none;
             background-color: transparent;
             border-radius: 4px;
         }
@@ -493,11 +493,11 @@
             top: 46px;
             overflow-y: auto;
             max-height: calc(100% - 55px);
-            -webkit-user-select: 无;
-            user-select: 无;
+            -webkit-user-select: none;
+            user-select: none;
             border-radius: 5px;
             padding: 8px 12px 8px 12px;
-            box-shadow: 0 0 6px rgba(0， 0， 0， 0.15);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
         }
 
         #setDialog input {
@@ -526,7 +526,7 @@
         }
 
         .inputTextClass {
-            outline: 无;
+            outline: none;
             border-radius: 2px;
             margin-top: 2px;
             height: 32px;
@@ -633,11 +633,11 @@
         }
 
         .refreshReq svg:not(:first-child) {
-            display: 无;
+            display: none;
         }
 
         .halfRefReq svg:not(:nth-child(2)) {
-            display: 无;
+            display: none;
         }
 
         .moreOption {
@@ -655,7 +655,7 @@
         }
 
         .moreOptionHidden>div {
-            display: 无 !important;
+            display: none !important;
         }
 
         .optionItems:hover {
@@ -701,7 +701,7 @@
         }
 
         .optionItem * {
-            pointer-events: 无;
+            pointer-events: none;
         }
 
         .optionItem:hover {
@@ -709,15 +709,15 @@
         }
 
         .readyVoice svg:not(:first-child) {
-            display: 无;
+            display: none;
         }
 
         .pauseVoice svg:not(:nth-child(2)) {
-            display: 无;
+            display: none;
         }
 
         .resumeVoice svg:not(:nth-child(3)) {
-            display: 无;
+            display: none;
         }
 
         #voiceTypes>span {
@@ -741,7 +741,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            background-color: rgba(0， 0， 0， .3);
+            background-color: rgba(0, 0, 0, .3);
             z-index: 90;
             opacity: 0;
             visibility: hidden;
@@ -948,7 +948,7 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%， -50%);
+            transform: translate(-50%, -50%);
             text-align: center;
         }
 
@@ -993,11 +993,11 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%， -50%);
+            transform: translate(-50%, -50%);
         }
 
         #voiceRecIcon>svg .animVoice {
-            display: 无;
+            display: none;
         }
 
         .voiceRecing>svg {
@@ -1310,7 +1310,7 @@
                         </svg>
                         <span>导入</span>
                     </label>
-                    <input type="file" style="display: 无;" id="importChatInput" accept="application/json">
+                    <input type="file" style="display: none;" id="importChatInput" accept="application/json">
                     <div id="clearChat">
                         <svg width="24" height="24">
                             <use xlink:href="#clearAllIcon"></use>
@@ -1364,8 +1364,8 @@
                     </div>
                     <div>
                         <div>我没有API key？</div>
-                        <input class="inputTextClass" value="可以联系微信:byxewl (5.5r = 5美元余额key，可用到过期也可登录官方)"
-                            placeholder="" id="qq">
+                        <input class="inputTextClass" value="可以联系微信:byxewl (5.5r = 5美元余额key，可用到过期也可登录官方)" placeholder=""
+                            id="qq">
                         <!--<input class="inputTextClass" value="https://api.1re.ren/"-->
                         <!--    placeholder="https://api.1re.ren/" id="apiHostInput">-->
                         <input type="hidden" class="inputTextClass" value="https://api.1re.ren/"
@@ -1627,61 +1627,61 @@
         let azureKey;
         let azureRole = [];
         let azureStyle = [];
-        let isSafeEnv = location.hostname。match(/127.|localhost/) || location.protocol。match(/https:|file:/); // https或本地安全环境
+        let isSafeEnv = location.hostname.match(/127.|localhost/) || location.protocol.match(/https:|file:/); // https或本地安全环境
         let supportRec = !!window.webkitSpeechRecognition && isSafeEnv; // 是否支持语音识别输入
         let recing = false;
         let toggleRecEv;
         textarea.focus();
         const textInputEvent = () => {
             if (!loading) {
-                if (textarea.value。trim()。length) {
-                    sendBtnEle.classList。add("activeSendBtn");
+                if (textarea.value.trim().length) {
+                    sendBtnEle.classList.add("activeSendBtn");
                 } else {
-                    sendBtnEle.classList。remove("activeSendBtn");
+                    sendBtnEle.classList.remove("activeSendBtn");
                 }
             }
-            textarea.style。height = "47px";
-            textarea.style。height = textarea.scrollHeight + "px";
+            textarea.style.height = "47px";
+            textarea.style.height = textarea.scrollHeight + "px";
         };
         textarea.oninput = textInputEvent;
         if (supportRec) {
-            noRecTip.style。display = "none";
-            yesRec.style。display = "block";
-            document.getElementById("voiceRec")。style。display = "block";
-            textarea.classList。add("message_if_voice");
+            noRecTip.style.display = "none";
+            yesRec.style.display = "block";
+            document.getElementById("voiceRec").style.display = "block";
+            textarea.classList.add("message_if_voice");
             let langs = [ // from https://www.google.com/intl/en/chrome/demos/speech.html
-                ['中文'， ['cmn-Hans-CN'， '普通话 (大陆)']，
-                    ['cmn-Hans-HK'， '普通话 (香港)']，
-                    ['cmn-Hant-TW'， '中文 (台灣)']，
-                    ['yue-Hant-HK'， '粵語 (香港)']]，
-                ['English'， ['en-US'， 'United States']，
-                    ['en-GB'， 'United Kingdom']，
-                    ['en-AU'， 'Australia']，
-                    ['en-CA'， 'Canada']，
-                    ['en-IN'， 'India']，
-                    ['en-KE'， 'Kenya']，
-                    ['en-TZ'， 'Tanzania']，
-                    ['en-GH'， 'Ghana']，
-                    ['en-NZ'， 'New Zealand']，
-                    ['en-NG'， 'Nigeria']，
-                    ['en-ZA'， 'South Africa']，
-                    ['en-PH'， 'Philippines']]
+                ['中文', ['cmn-Hans-CN', '普通话 (大陆)'],
+                    ['cmn-Hans-HK', '普通话 (香港)'],
+                    ['cmn-Hant-TW', '中文 (台灣)'],
+                    ['yue-Hant-HK', '粵語 (香港)']],
+                ['English', ['en-US', 'United States'],
+                    ['en-GB', 'United Kingdom'],
+                    ['en-AU', 'Australia'],
+                    ['en-CA', 'Canada'],
+                    ['en-IN', 'India'],
+                    ['en-KE', 'Kenya'],
+                    ['en-TZ', 'Tanzania'],
+                    ['en-GH', 'Ghana'],
+                    ['en-NZ', 'New Zealand'],
+                    ['en-NG', 'Nigeria'],
+                    ['en-ZA', 'South Africa'],
+                    ['en-PH', 'Philippines']]
             ];
-            langs.forEach((lang， i) => {
-                select_language.options。add(new Option(lang[0], i));
-                selectLangOption.options。add(new Option(lang[0], i))
+            langs.forEach((lang, i) => {
+                select_language.options.add(new Option(lang[0], i));
+                selectLangOption.options.add(new Option(lang[0], i))
             });
             const updateCountry = function () {
-                selectLangOption.selectedIndex = select_language.selectedIndex = this。selectedIndex;
+                selectLangOption.selectedIndex = select_language.selectedIndex = this.selectedIndex;
                 select_dialect.innerHTML = "";
                 selectDiaOption.innerHTML = "";
                 let list = langs[select_language.selectedIndex];
                 for (let i = 1; i < list.length; i++) {
-                    select_dialect.options。add(new Option(list[i][1], list[i][0]));
-                    selectDiaOption.options。add(new Option(list[i][1], list[i][0]));
+                    select_dialect.options.add(new Option(list[i][1], list[i][0]));
+                    selectDiaOption.options.add(new Option(list[i][1], list[i][0]));
                 }
-                select_dialect.style。visibility = list[1]。length == 1 ? 'hidden' : 'visible';
-                selectDiaOption.parentElement。style。visibility = list[1]。length == 1 ? 'hidden' : 'visible';
+                select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+                selectDiaOption.parentElement.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
                 localStorage.setItem("voiceRecLang", select_dialect.value);
             };
             let localLangIdx = 0;
@@ -1703,7 +1703,7 @@
             selectLangOption.onchange = updateCountry;
             select_language.onchange = updateCountry;
             selectDiaOption.onchange = select_dialect.onchange = function () {
-                selectDiaOption.selectedIndex = select_dialect.selectedIndex = this。selectedIndex;
+                selectDiaOption.selectedIndex = select_dialect.selectedIndex = this.selectedIndex;
                 localStorage.setItem("voiceRecLang", select_dialect.value);
             }
             selectLangOption.selectedIndex = select_language.selectedIndex = localLangIdx;
@@ -2168,10 +2168,10 @@
                         azureStyle[voiceType] = void 0;
                         localStorage.removeItem("azureStyle" + voiceType);
                     }
-                    preSetVoiceStyle.style。display = voiceStyles ? "block" : "none";
-                    preSetVoiceStyle.previousElementSibling。style。display = voiceStyles ? "block" : "none";
+                    preSetVoiceStyle.style.display = voiceStyles ? "block" : "none";
+                    preSetVoiceStyle.previousElementSibling.style.display = voiceStyles ? "block" : "none";
                 } else {
-                    document.getElementById("azureExtra")。style。display = "none";
+                    document.getElementById("azureExtra").style.display = "none";
                     azureRole[voiceType] = void 0;
                     localStorage.removeItem("azureRole" + voiceType);
                     azureStyle[voiceType] = void 0;
@@ -2215,13 +2215,13 @@
                 if (localVolume) {
                     voiceVolume[voiceType] = parseFloat(localVolume);
                     volumeEle.value = localVolume;
-                    volumeEle.style。backgroundSize = (volumeEle.value - volumeEle.min) * 100 / (volumeEle.max - volumeEle.min) + "% 100%";
+                    volumeEle.style.backgroundSize = (volumeEle.value - volumeEle.min) * 100 / (volumeEle.max - volumeEle.min) + "% 100%";
                 } else {
                     volumeEle.dispatchEvent(new Event("input"));
                 }
             }
             volumeEle.oninput = () => {
-                volumeEle.style。backgroundSize = (volumeEle.value - volumeEle.min) * 100 / (volumeEle.max - volumeEle.min) + "% 100%";
+                volumeEle.style.backgroundSize = (volumeEle.value - volumeEle.min) * 100 / (volumeEle.max - volumeEle.min) + "% 100%";
                 voiceVolume[voiceType] = parseFloat(volumeEle.value);
                 localStorage.setItem("voiceVolume" + voiceType, volumeEle.value);
             }
@@ -2234,13 +2234,13 @@
                 if (localRate) {
                     voiceRate[voiceType] = parseFloat(localRate);
                     rateEle.value = localRate;
-                    rateEle.style。backgroundSize = (rateEle.value - rateEle.min) * 100 / (rateEle.max - rateEle.min) + "% 100%";
+                    rateEle.style.backgroundSize = (rateEle.value - rateEle.min) * 100 / (rateEle.max - rateEle.min) + "% 100%";
                 } else {
                     rateEle.dispatchEvent(new Event("input"));
                 }
             }
             rateEle.oninput = () => {
-                rateEle.style。backgroundSize = (rateEle.value - rateEle.min) * 100 / (rateEle.max - rateEle.min) + "% 100%";
+                rateEle.style.backgroundSize = (rateEle.value - rateEle.min) * 100 / (rateEle.max - rateEle.min) + "% 100%";
                 voiceRate[voiceType] = parseFloat(rateEle.value);
                 localStorage.setItem("voiceRate" + voiceType, rateEle.value);
             }
@@ -2376,81 +2376,81 @@
         };
         const copyClickCode = (ele) => {
             const input = document.createElement("textarea");
-            input.value = ele.dataset。mdicContent;
+            input.value = ele.dataset.mdicContent;
             const nDom = ele.previousElementSibling;
-            const nDelay = ele.dataset。mdicNotifyDelay;
+            const nDelay = ele.dataset.mdicNotifyDelay;
             const cDom = nDom.previousElementSibling;
-            document.body。appendChild(input);
+            document.body.appendChild(input);
             input.select();
-            input.setSelectionRange(0， 9999);
+            input.setSelectionRange(0, 9999);
             document.execCommand("copy");
-            document.body。removeChild(input);
-            if (nDom.style。display === "none") {
-                nDom.style。display = "block";
-                cDom && (cDom.style。display = "none");
+            document.body.removeChild(input);
+            if (nDom.style.display === "none") {
+                nDom.style.display = "block";
+                cDom && (cDom.style.display = "none");
                 setTimeout(() => {
-                    nDom.style。display = "none";
-                    cDom && (cDom.style。display = "block");
+                    nDom.style.display = "none";
+                    cDom && (cDom.style.display = "block");
                 }, nDelay);
             }
         };
         const copyClickMd = (idx) => {
             const input = document.createElement("textarea");
-            input.value = data[idx]。content;
-            document.body。appendChild(input);
+            input.value = data[idx].content;
+            document.body.appendChild(input);
             input.select();
-            input.setSelectionRange(0， 9999);
+            input.setSelectionRange(0, 9999);
             document.execCommand("copy");
-            document.body。removeChild(input);
+            document.body.removeChild(input);
         }
-        const enhanceCode = (render， options = {}) => (...args) => {
+        const enhanceCode = (render, options = {}) => (...args) => {
             /* args = [tokens, idx, options, env, slf] */
             const {
-                btnText = "复制代码"， // button text
-                successText = "复制成功"， // copy-success text
-                successTextDelay = 2000， // successText show time [ms]
-                showCodeLanguage = true， // false | show code language
+                btnText = "复制代码", // button text
+                successText = "复制成功", // copy-success text
+                successTextDelay = 2000, // successText show time [ms]
+                showCodeLanguage = true, // false | show code language
             } = options;
-            const [tokens = {}， idx = 0] = args;
-            const cont = strEncode(tokens[idx]。content || "");
+            const [tokens = {}, idx = 0] = args;
+            const cont = strEncode(tokens[idx].content || "");
             const originResult = render.apply(this, args);
             const langFrag = showCodeLanguage ? getCodeLangFragment(originResult) : "";
             const tpls = [
-                '<div class="m-mdic-copy-wrapper">'，
-                `${langFrag}`，
-                `<div class="u-mdic-copy-notify" style="display:none;">${successText}</div>`，
-                '<button '，
-                'class="u-mdic-copy-btn j-mdic-copy-btn" '，
-                `data-mdic-content="${cont}" `，
-                `data-mdic-notify-delay="${successTextDelay}" `，
-                `onclick="copyClickCode(this)">${btnText}</button>`，
-                '</div>'，
+                '<div class="m-mdic-copy-wrapper">',
+                `${langFrag}`,
+                `<div class="u-mdic-copy-notify" style="display:none;">${successText}</div>`,
+                '<button ',
+                'class="u-mdic-copy-btn j-mdic-copy-btn" ',
+                `data-mdic-content="${cont}" `,
+                `data-mdic-notify-delay="${successTextDelay}" `,
+                `onclick="copyClickCode(this)">${btnText}</button>`,
+                '</div>',
             ];
             const LAST_TAG = "</pre>";
             const newResult = originResult.replace(LAST_TAG, `${tpls.join("")}${LAST_TAG}`);
             return newResult;
         };
-        const codeBlockRender = md.renderer。rules。code_block;
-        const fenceRender = md.renderer。rules。fence;
-        md.renderer。rules。code_block = enhanceCode(codeBlockRender);
-        md.renderer。rules。fence = enhanceCode(fenceRender);
-        md.renderer。rules。image = function (tokens， idx， options， env， slf) {
+        const codeBlockRender = md.renderer.rules.code_block;
+        const fenceRender = md.renderer.rules.fence;
+        md.renderer.rules.code_block = enhanceCode(codeBlockRender);
+        md.renderer.rules.fence = enhanceCode(fenceRender);
+        md.renderer.rules.image = function (tokens, idx, options, env, slf) {
             let token = tokens[idx];
             token.attrs[token.attrIndex("alt")][1] = slf.renderInlineAsText(token.children, options, env);
-            token.attrSet("onload"， "scrollToBottomLoad(this);this.removeAttribute('onload');this.removeAttribute('onerror')");
-            token.attrSet("onerror"， "scrollToBottomLoad(this);this.removeAttribute('onload');this.removeAttribute('onerror')");
+            token.attrSet("onload", "scrollToBottomLoad(this);this.removeAttribute('onload');this.removeAttribute('onerror')");
+            token.attrSet("onerror", "scrollToBottomLoad(this);this.removeAttribute('onload');this.removeAttribute('onerror')");
             return slf.renderToken(tokens, idx, options)
         }
         const mdOptionEvent = function (ev) {
-            let id = ev.target。dataset。id;
+            let id = ev.target.dataset.id;
             if (id) {
-                let parent = ev.target。parentElement;
+                let parent = ev.target.parentElement;
                 let idxEle = parent.parentElement;
-                let idx = Array.prototype。indexOf。call(chatlog.children， this。parentElement);
+                let idx = Array.prototype.indexOf.call(chatlog.children, this.parentElement);
                 if (id === "voiceMd") {
                     let className = parent.className;
                     if (className == "readyVoice") {
-                        if (chatlog.children[idx]。dataset。loading !== "true") {
+                        if (chatlog.children[idx].dataset.loading !== "true") {
                             idx = systemRole ? idx + 1 : idx;
                             speechEvent(idx);
                         }
@@ -2702,7 +2702,7 @@
             downBlob(blob, fileName);
         };
         const blobToText = (blob) => {
-            return new Promise((res， rej) => {
+            return new Promise((res, rej) => {
                 let reader = new FileReader();
                 reader.readAsText(blob);
                 reader.onload = () => {
@@ -2713,9 +2713,9 @@
                 }
             })
         };
-        document.getElementById("importChatInput")。onchange = function () {
-            let file = this。文件[0];
-            blobToText(file)。then(text => {
+        document.getElementById("importChatInput").onchange = function () {
+            let file = this.files[0];
+            blobToText(file).then(text => {
                 try {
                     let json = JSON.parse(text);
                     let checked = json.every(item => {
@@ -2733,10 +2733,10 @@
                 } catch (e) {
                     notyf.error("导入失败，请检查文件是否正确！")
                 }
-                this。value = "";
+                this.value = "";
             })
         };
-        document.getElementById("clearChat")。onclick = () => {
+        document.getElementById("clearChat").onclick = () => {
             if (confirmAction("是否清空所有会话?")) {
                 chatsData.length = 0;
                 chatListEle.innerHTML = "";
@@ -3582,17 +3582,17 @@
             if (recing) {
                 toggleRecEv();
             }
-            let message = textarea.value.trim();
+            let message = textarea.value。trim();
             if (message.length !== 0) {
                 if (loading === true) return;
                 textarea.value = "";
-                textarea.style.height = "47px";
+                textarea.style。height = "47px";
                 generateText(message);
             }
         };
         sendBtnEle.onclick = genFunc;
         stopEle.onclick = stopLoading;
-        document.getElementById("clearConv").onclick = () => {
+        document.getElementById("clearConv")。onclick = () => {
             if (!loading && confirmAction("是否清空会话?")) {
                 endSpeak();
                 if (systemRole) { data.length = 1 }
@@ -3610,21 +3610,21 @@
         const downRoleController = new AbortController();
         setTimeout(() => {
             downRoleController.abort();
-        }, 10000);
+        }， 10000);
         const preEle = document.getElementById("preSetSystem");
-        fetch("https://cdn.jsdelivr.net/gh/PlexPt/awesome-chatgpt-prompts-zh/prompts-zh.json", {
+        fetch("https://cdn.jsdelivr.net/gh/PlexPt/awesome-chatgpt-prompts-zh/prompts-zh.json"， {
             signal: downRoleController.signal
-        }).then(async (response) => {
+        })。then(async (response) => {
             let res = await response.json();
             for (let i = 0; i < res.length; i++) {
                 let key = "act" + i;
-                presetRoleData[key] = res[i].prompt.trim();
+                presetRoleData[key] = res[i]。prompt。trim();
                 let optionEle = document.createElement("option");
-                optionEle.text = res[i].act;
+                optionEle.text = res[i]。act;
                 optionEle.value = key;
-                preEle.options.add(optionEle);
+                preEle.options。add(optionEle);
             }
-        }).catch(e => { })
+        })。catch(e => { })
     </script>
 
 
