@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>简约PS</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/master-photo/dist/masterphoto.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/master-photo/dist/masterphoto.umd.min.js"></script>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #app {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <m-view>
+            <template v-slot:side>
+                <m-filter></m-filter>
+            </template>
+            <template v-slot:header>
+                <m-viewbar>
+                    <m-zoomin></m-zoomin>
+                    <m-zoomnum></m-zoomnum>
+                    <m-zoomout></m-zoomout>
+                    <m-fitcenter></m-fitcenter>
+                    <m-rotate direction="left"></m-rotate>
+                    <m-rotate direction="right"></m-rotate>
+                </m-viewbar>
+            </template>
+            <template v-slot:footer>
+                <m-toolbar>
+                    <m-rect-tool></m-rect-tool>
+                    <m-ellipse-tool></m-ellipse-tool>
+                    <m-arrowline-tool></m-arrowline-tool>
+                    <m-pencil-tool></m-pencil-tool>
+                    <m-mosaic-tool></m-mosaic-tool>
+                    <m-text-tool></m-text-tool>
+                    <m-undo-tool></m-undo-tool>
+                    <m-redo-tool></m-redo-tool>
+                    <m-clear-tool></m-clear-tool>
+                    <m-file-tool></m-file-tool>
+                </m-toolbar>
+            </template>
+        </m-view>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {}
+        }
+    })
+</script>
+
+</html>
