@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+       <!DOCTYPE html>
 <html>
 
 <head>
@@ -165,7 +165,7 @@
 
       .btn-upload .tooltip-inner,
       .btn-toggle .tooltip-inner {
-        white-space: nowrap;
+        white-space: 现在rap;
       }
 
       .btn-toggle {
@@ -552,16 +552,16 @@
         var $dataScaleX = $('#dataScaleX');
         var $dataScaleY = $('#dataScaleY');
         var options = {
-          aspectRatio: 16 / 9,
-          preview: '.img-preview',
+          aspectRatio: 16 / 9，
+          preview: '.img-preview'，
           crop: function (e) {
-            $dataX.val(Math.round(e.detail.x));
-            $dataY.val(Math.round(e.detail.y));
-            $dataHeight.val(Math.round(e.detail.height));
-            $dataWidth.val(Math.round(e.detail.width));
-            $dataRotate.val(e.detail.rotate);
-            $dataScaleX.val(e.detail.scaleX);
-            $dataScaleY.val(e.detail.scaleY);
+            $dataX.val(Math.round(e.detail。x));
+            $dataY.val(Math.round(e.detail。y));
+            $dataHeight.val(Math.round(e.detail。height));
+            $dataWidth.val(Math.round(e.detail。width));
+            $dataRotate.val(e.detail。rotate);
+            $dataScaleX.val(e.detail。scaleX);
+            $dataScaleY.val(e.detail。scaleY);
           }
         };
         var originalImageURL = $image.attr('src');
@@ -570,47 +570,47 @@
         var uploadedImageURL;
 
         // Tooltip
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="tooltip"]')。tooltip();
 
         // Cropper
-        $image.on({
+        $image.于({
           ready: function (e) {
             console.log(e.type);
-          },
+          }，
           cropstart: function (e) {
-            console.log(e.type, e.detail.action);
-          },
+            console.log(e.type, e.detail。action);
+          }，
           cropmove: function (e) {
-            console.log(e.type, e.detail.action);
-          },
+            console.log(e.type, e.detail。action);
+          }，
           cropend: function (e) {
-            console.log(e.type, e.detail.action);
-          },
+            console.log(e.type, e.detail。action);
+          }，
           crop: function (e) {
             console.log(e.type);
-          },
+          }，
           zoom: function (e) {
-            console.log(e.type, e.detail.ratio);
+            console.log(e.type, e.detail。ratio);
           }
-        }).cropper(options);
+        })。cropper(options);
 
         // Buttons
-        if (!$.isFunction(document.createElement('canvas').getContext)) {
-          $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+        if (!$.isFunction(document.createElement('canvas')。getContext)) {
+          $('button[data-method="getCroppedCanvas"]')。prop('disabled'， true);
         }
 
-        if (typeof document.createElement('cropper').style.transition === 'undefined') {
-          $('button[data-method="rotate"]').prop('disabled', true);
-          $('button[data-method="scale"]').prop('disabled', true);
+        if (typeof document.createElement('cropper')。style。transition === 'undefined') {
+          $('button[data-method="rotate"]')。prop('disabled'， true);
+          $('button[data-method="scale"]')。prop('disabled'， true);
         }
 
         // Download
-        if (typeof $download[0].download === 'undefined') {
+        if (typeof $download[0]。download === 'undefined') {
           $download.addClass('disabled');
         }
 
         // Options
-        $('.docs-toggles').on('change', 'input', function () {
+        $('.docs-toggles')。于('change'， 'input'， function () {
           var $this = $(this);
           var name = $this.attr('name');
           var type = $this.prop('type');
@@ -634,11 +634,11 @@
             options[name] = $this.val();
           }
 
-          $image.cropper('destroy').cropper(options);
+          $image.cropper('destroy')。cropper(options);
         });
 
         // Methods
-        $('.docs-buttons').on('click', '[data-method]', function () {
+        $('.docs-buttons')。于('click'， '[data-method]'， function () {
           var $this = $(this);
           var data = $this.data();
           var cropper = $image.data('cropper');
@@ -681,7 +681,7 @@
                     data.option = {};
                   }
 
-                  data.option.fillColor = '#fff';
+                  data.option。fillColor = '#fff';
                 }
 
                 break;
@@ -699,13 +699,13 @@
 
               case 'scaleX':
               case 'scaleY':
-                $(this).data('option', -data.option);
+                $(this)。data('option', -data.option);
                 break;
 
               case 'getCroppedCanvas':
                 if (result) {
                   // Bootstrap's Modal
-                  $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+                  $('#getCroppedCanvasModal')。modal()。find('.modal-body')。html(result);
 
                   if (!$download.hasClass('disabled')) {
                     download.download = uploadedImageName;
@@ -736,30 +736,30 @@
         });
 
         // Keyboard
-        $(document.body).on('keydown', function (e) {
-          if (e.target !== this || !$image.data('cropper') || this.scrollTop > 300) {
+        $(document.body)。于('keydown'， function (e) {
+          if (e.target !== this || !$image.data('cropper') || this。scrollTop > 300) {
             return;
           }
 
           switch (e.which) {
             case 37:
               e.preventDefault();
-              $image.cropper('move', -1, 0);
+              $image.cropper('move', -1， 0);
               break;
 
             case 38:
               e.preventDefault();
-              $image.cropper('move', 0, -1);
+              $image.cropper('move'， 0, -1);
               break;
 
             case 39:
               e.preventDefault();
-              $image.cropper('move', 1, 0);
+              $image.cropper('move'， 1， 0);
               break;
 
             case 40:
               e.preventDefault();
-              $image.cropper('move', 0, 1);
+              $image.cropper('move'， 0， 1);
               break;
           }
         });
@@ -769,7 +769,7 @@
 
         if (URL) {
           $inputImage.change(function () {
-            var files = this.files;
+            var 文件 = this。文件;
             var file;
 
             if (!$image.data('cropper')) {
@@ -779,7 +779,7 @@
             if (files && files.length) {
               file = files[0];
 
-              if (/^image\/\w+$/.test(file.type)) {
+              if (/^image\/\w+$/。test(file.type)) {
                 uploadedImageName = file.name;
                 uploadedImageType = file.type;
 
@@ -788,7 +788,7 @@
                 }
 
                 uploadedImageURL = URL.createObjectURL(file);
-                $image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+                $image.cropper('destroy')。attr('src', uploadedImageURL)。cropper(options);
                 $inputImage.val('');
               } else {
                 window.alert('Please choose an image file.');
@@ -796,14 +796,14 @@
             }
           });
         } else {
-          $inputImage.prop('disabled', true).parent().addClass('disabled');
+          $inputImage.prop('disabled'， true)。parent()。addClass('disabled');
         }
       });
 
     </script>
 
     <!--End-->
-    <div id="row-alert" class="row margin-t-18" style="display: none;">
+    <div id="row-alert" class="row margin-t-18" style="display: 无;">
       <div class="col-xs-12 col-sm-12">
         <div class="alert alert-warning alert-dismissible fade in" role="alert" style="margin-bottom: 0px;">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -825,7 +825,7 @@
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1979015608814436"
               data-ad-slot="5557529889" data-ad-format="auto" data-full-width-responsive="false"></ins>
             <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
+              (adsbygoogle = window.adsbygoogle || [])。push({});
             </script>
           </div>
         </div>
@@ -833,9 +833,9 @@
     </div>
 
 
-    <h1 class="page-header"></h1>
+<!--     <h1 class="page-header"></h1>
     <footer class="footer">
-    </footer>
+    </footer> -->
   </div>
   </div>
   </div>
@@ -850,12 +850,12 @@
   <script src="static/js/baidu.tongji.js"></script>
   <script type="text/javascript">
     // 随机背景
-    $("#app-coupon-search").geopattern(Math.random().toString());
+    $("#app-coupon-search")。geopattern(Math.random()。toString());
 
     // 页面二维码
-    $('#qr-link').popover({
-      trigger: 'hover',
-      html: true,
+    $('#qr-link')。popover({
+      trigger: 'hover'，
+      html: true，
       content: '      <div id="qrPanel" class="panel panel-default">' +
         '          <div class="panel-body">' +
         '            <div id="qr">' +
@@ -863,38 +863,38 @@
         '            </div>' +
         '          </div>' +
         '      </div>'
-    }).on('inserted.bs.popover', function () {
-      var data = jrQrcode.getQrBase64(window.location.href, {
-        padding: 0,
-        width: 150,
-        height: 150,
-        correctLevel: 2,
+    })。于('inserted.bs.popover'， function () {
+      var data = jrQrcode.getQrBase64(window.location。href， {
+        padding: 0，
+        width: 150，
+        height: 150，
+        correctLevel: 2，
       });
-      $('#qr img').attr('src', data);
-      $('#qr img').addClass("img-responsive");
+      $('#qr img')。attr('src', data);
+      $('#qr img')。addClass("img-responsive");
     })
 
     // 复制链接
-    $('#btn-link').click(function () {
+    $('#btn-link')。click(function () {
       link();
     });
 
     function link() {
       var clipboard = new ClipboardJS('#btn-link')
-      clipboard.on('success', e => {
-        $("#alert-message").text('链接已复制到剪贴板');
-        $("#row-alert").show();
+      clipboard.于('success'， e => {
+        $("#alert-message")。text('链接已复制到剪贴板');
+        $("#row-alert")。show();
         clipboard.destroy()
       })
-      clipboard.on('error', e => {
-        $("#alert-message").text('该浏览器不支持自动复制');
-        $("#row-alert").show();
+      clipboard.于('error'， e => {
+        $("#alert-message")。text('该浏览器不支持自动复制');
+        $("#row-alert")。show();
         clipboard.destroy()
       })
     }
 
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="tooltip"]')。tooltip()
       HtmlBind_Search();
       Bind_Tongji();
     });
