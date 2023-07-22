@@ -11,7 +11,7 @@
     <style>
         * {
             box-sizing: border-box;
-            font-family: -apple-system， BlinkMacSystemFont， "Segoe UI"， "Noto Sans"， Helvetica， Arial， sans-serif， "Apple Color Emoji"， "Segoe UI Emoji" !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
         }
 
         html {
@@ -37,8 +37,8 @@
             left: 50%;
             top: 50%;
             overflow: hidden;
-            transform: translate(-50%， -50%);
-            box-shadow: 0 10px 20px rgba(0， 0， 0， 0.15);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
         .top_menu {
@@ -1310,7 +1310,7 @@
                         </svg>
                         <span>导入</span>
                     </label>
-                    <input type="file" style="display: 无;" id="importChatInput" accept="application/json">
+                    <input type="file" style="display: none;" id="importChatInput" accept="application/json">
                     <div id="clearChat">
                         <svg width="24" height="24">
                             <use xlink:href="#clearAllIcon"></use>
@@ -1346,7 +1346,7 @@
                 <div id="convOption">
 
                     <div>
-                         <p>提示：<font style="color:red;font-weight:bold;">
+                        <p>提示：<font style="color:red;font-weight:bold;">
                                 请勿提问一切有关政治、军事、外交等问题，防止不必要麻烦哦，谢谢！每个公共key官方有时间次数限制，如果限制了请换一个key哦！</font>
                         </p>
                     </div>
@@ -3614,17 +3614,17 @@
             if (recing) {
                 toggleRecEv();
             }
-            let message = textarea.value.trim();
+            let message = textarea.value。trim();
             if (message.length !== 0) {
                 if (loading === true) return;
                 textarea.value = "";
-                textarea.style.height = "47px";
+                textarea.style。height = "47px";
                 generateText(message);
             }
         };
         sendBtnEle.onclick = genFunc;
         stopEle.onclick = stopLoading;
-        document.getElementById("clearConv").onclick = () => {
+        document.getElementById("clearConv")。onclick = () => {
             if (!loading && confirmAction("是否清空会话?")) {
                 endSpeak();
                 if (systemRole) { data.length = 1 }
@@ -3642,21 +3642,21 @@
         const downRoleController = new AbortController();
         setTimeout(() => {
             downRoleController.abort();
-        }, 10000);
+        }， 10000);
         const preEle = document.getElementById("preSetSystem");
-        fetch("https://cdn.jsdelivr.net/gh/PlexPt/awesome-chatgpt-prompts-zh/prompts-zh.json", {
+        fetch("https://cdn.jsdelivr.net/gh/PlexPt/awesome-chatgpt-prompts-zh/prompts-zh.json"， {
             signal: downRoleController.signal
-        }).then(async (response) => {
+        })。then(async (response) => {
             let res = await response.json();
             for (let i = 0; i < res.length; i++) {
                 let key = "act" + i;
-                presetRoleData[key] = res[i].prompt.trim();
+                presetRoleData[key] = res[i]。prompt。trim();
                 let optionEle = document.createElement("option");
-                optionEle.text = res[i].act;
+                optionEle.text = res[i]。act;
                 optionEle.value = key;
-                preEle.options.add(optionEle);
+                preEle.options。add(optionEle);
             }
-        }).catch(e => { })
+        })。catch(e => { })
     </script>
 
 
