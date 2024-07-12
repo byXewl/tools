@@ -1,0 +1,398 @@
+<html>
+
+<head>
+    <title>小程序跳转</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="refresh" content="0;url=weixin://dl/business/?t=2sUDJJpy5mn">
+    <meta name="description" content="点击链接前往微信打开微信小程序~" />
+    <meta itemprop="name" content="自动打开" />
+    <meta itemprop="image" content="https://nilife.oss-cn-beijing.aliyuncs.com/miniapp/images/setting/logo.png" />
+    <script>
+        window.onerror = e => {
+            console.error(e)
+        }
+    </script>
+    <!-- weui 样式 -->
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.1/weui.min.css">
+    </link>
+    <script src="https://nilife.oss-cn-beijing.aliyuncs.com/miniapp/images/setting/jquery-3.5.1-min.js"></script>
+    <link href="" rel="apple-touch-icon-precomposed">
+    <link href="" sizes="114x114" rel="apple-touch-icon-precomposed">
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .full {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .public-web-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .public-web-container p {
+            position: absolute;
+            top: 40%;
+        }
+
+        .notice-msg {
+            width: 100%;
+            float: left;
+            line-height: 30px;
+            text-align: center;
+            margin: 10px 0px 20px 0px;
+            padding: 0px 15px;
+            box-sizing: border-box;
+            color: #666666;
+            font-size: 15px;
+            float: left;
+        }
+
+        .notice-msg small {
+            font-size: 13px;
+        }
+
+        .public-container {
+            width: 100%;
+            float: left;
+            text-align: center;
+        }
+
+        .qrcodes-container {
+            width: 100%;
+            height: 150px;
+            line-height: 150px;
+            font-weight: 300;
+            float: left;
+            margin: 30px 0px;
+            text-align: center;
+        }
+
+        .qrcodes {
+            width: 150px;
+            height: 150px;
+            margin: 0px auto;
+            display: none;
+        }
+
+        .error-images {
+            width: 80px;
+            height: 80px;
+            margin: 50px auto 10px auto;
+        }
+
+        .error-msg {
+            width: 100%;
+            float: left;
+            line-height: 30px;
+            text-align: center;
+            padding: 0px 15px;
+            box-sizing: border-box;
+            color: #666666;
+            font-size: 15px;
+        }
+
+        .dianji-img {
+            width: 70%;
+            margin: 0px 15%;
+            height: auto;
+            float: left;
+            display: none;
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin: 140px 0px 0px 0px;
+        }
+
+        .button-container {
+            width: 100%;
+            height: 45px;
+            line-height: 45px;
+            font-weight: 300;
+            float: left;
+        }
+
+        .button-container .default {
+            display: block;
+            width: 280px;
+            height: 50px;
+            line-height: 50px;
+            font-weight: 300;
+            font-size: 15px;
+            background-color: #06ae56;
+            color: #FFFFFF;
+            margin: 0px auto;
+            position: relative;
+            border-radius: 3px;
+        }
+
+        .button-container .circle {
+            display: block;
+            width: 280px;
+            height: 50px;
+            line-height: 50px;
+            font-weight: 300;
+            font-size: 15px;
+            background-color: #06ae56;
+            color: #FFFFFF;
+            margin: 0px auto;
+            position: relative;
+            border-radius: 50px;
+            border: none;
+        }
+
+        .button-container .red {
+            display: block;
+            width: 280px;
+            height: 50px;
+            line-height: 50px;
+            font-weight: 300;
+            font-size: 15px;
+            background-color: #FB0106;
+            color: #FFFFFF;
+            margin: 0px auto;
+            position: relative;
+            border-radius: 50px;
+            border: none;
+        }
+
+        .button-container .yellow {
+            display: block;
+            width: 280px;
+            height: 50px;
+            line-height: 50px;
+            font-weight: 300;
+            font-size: 15px;
+            background-color: #E1B55A;
+            color: #333333;
+            margin: 0px auto;
+            position: relative;
+            border-radius: 50px;
+            border: none;
+        }
+
+        .button-container .yellow span {
+            color: #333333;
+        }
+
+        .button-container .yellow i {
+            color: #333333;
+        }
+
+        .button-container .blue {
+            display: block;
+            width: 280px;
+            height: 50px;
+            line-height: 50px;
+            font-weight: 300;
+            font-size: 15px;
+            background-color: #257CF9;
+            color: #FFFFFF;
+            margin: 0px auto;
+            position: relative;
+            border-radius: 50px;
+            border: none;
+        }
+
+        .button-container .notobvious {
+            display: block;
+            width: 200px;
+            height: 45px;
+            line-height: 45px;
+            font-weight: 300;
+            font-size: 15px;
+            background-color: #f4f4f4;
+            color: #929f9b;
+            margin: 0px auto;
+            position: relative;
+            border-radius: 45px;
+        }
+
+        .button-container .notobvious span {
+            color: #929f9b;
+        }
+
+        .button-container .notobvious i {
+            color: #929f9b;
+        }
+
+        .fullimg {
+            width: 100%;
+            height: auto;
+            float: left;
+        }
+
+        .fullpageimg {
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+
+        .safe-notice {
+            width: 100%;
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 0px;
+        }
+
+        .safe-notice img {
+            width: 16px;
+            height: 16px;
+            margin-right: 3px;
+            margin-top: 1px;
+        }
+
+        .safe-notice p {
+            width: auto;
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+            color: #999999;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page full">
+        <div id="public-web-container" class="public-container">
+            <div class="safe-notice">
+                <img src="https://nilife.oss-cn-beijing.aliyuncs.com/miniapp/images/setting/safe.png">
+                <p>页面经过<font style="font-weight: 500;color: #333333;">SSL安全加密</font>!</p>
+            </div>
+            <img class="logo" src="https://nilife.oss-cn-beijing.aliyuncs.com/wepage/20210421-180054-178.png">
+            <p class="notice-msg"><small>正在跳转到微信小程序...</small><br>如未自动打开微信请点击下方按钮</p>
+            <div class="button-container">
+                <a id="public-web-jump-button" href="weixin://dl/business/?t=wx7e98cc686c3f4936" class="default">
+                    <span id="public-web-jump-button-loading"
+                        class="weui-primary-loading weui-primary-loading_transparent">
+                        <i class="weui-primary-loading__dot"></i>
+                    </span>
+                    正在打开微信....
+                </a>
+            </div>
+            <!-- weixin://dl/business/?t=小程序地址 -->
+            <a id="dianjiimg_links" href="weixin://dl/business/?t=wx7e98cc686c3f4936">
+                <img id="dianjiimg" class="dianji-img"
+                    src="https://nilife.oss-cn-beijing.aliyuncs.com/miniapp/banners/dianji.gif">
+            </a>
+            <div class="qrcodes-container">
+                <img class="qrcodes"
+                    src="https://33129999.xyz/wp-content/uploads/2022/11/QQ%E5%9B%BE%E7%89%8720221109104847.jpg">
+                <!-- 小程序二维码 -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var mobile_flag = isMobile();
+            var weixin = isWeiXin();
+            if (mobile_flag) {
+                var baidu = isBaidu();
+                var uc = isUc();
+                var weibo = isWeibo();
+                if (weixin) {
+                    if (2 != 1) {
+
+                    } else {
+                        window.location.href = "{&quot;path&quot;:&quot;&quot;,&quot;mini_id&quot;:&quot;wx7aa4a720eba4fb29&quot;}";
+                    }
+                } else if (baidu) {
+                    $(".notice-msg").html("如点击无法跳转微信,请点击底部分享到微信好友打开；或使用微信扫码。");
+                    $("#public-web-jump-button").html("点击立即前往微信");
+                    $(".qrcodes").show();
+                } else if (uc) {
+                    $("#public-web-jump-button").html("点击立即前往微信小程序");
+                    $("#dianjiimg").show();
+                } else if (weibo) {
+                    $(".notice-msg").html("正在跳转微信小程序,如未自动打开微信请点击下方按钮");
+                    $("#public-web-jump-button").attr("href", "sinaweibo://wbdiversion?username=gh_fe78baaaa76f&path=%2Fpages%2Findex%2Frequest%3Fid%3DDnEG93K5ja");
+                    window.location.href = "sinaweibo://wbdiversion?username=gh_fe78baaaa76f&path=%2Fpages%2Findex%2Frequest%3Fid%3DDnEG93K5ja";
+                } else {
+                    if (1 == 2) {
+                        $("#dianjiimg").show();
+                    }
+
+                    window.location.href = "weixin://dl/business/?t=wx7e98cc686c3f4936";
+                    var dianji = setTimeout("showDianji()", 3000);
+                }
+            } else {
+                if (2 != 1) {
+                    $(".notice-msg").html("请用微信扫描下方二维码,打开小程序！");
+                    $(".qrcodes").show();
+                    $("#public-web-jump-button").css({ "background-color": "#CCCCCC", "color": "#333333" }).html("扫码下方二维码");
+                } else {
+                    window.location.href = "{&quot;path&quot;:&quot;&quot;,&quot;mini_id&quot;:&quot;wxd3dc3a026578bcb1&quot;}";
+                }
+            }
+        });
+        //判断是否是微信浏览器的函数
+        function isWeiXin() {
+            var ua = navigator.userAgent.toLowerCase()
+            var isWXWork = ua.match(/wxwork/i) == 'wxwork'
+            var isWeixin = !isWXWork && ua.match(/micromessenger/i) == 'micromessenger'
+            return isWeixin;
+        }
+
+        //判断是否是百度浏览器浏览器的函数,百度不能调起其他APP
+        function isBaidu() {
+            ua = navigator.userAgent.toLowerCase();
+            if (ua.indexOf('baiduboxapp/') > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function isUc() {
+            if (navigator.userAgent.match(/(UCBrowser|Quark)/i)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function isWeibo() {
+            var ua = navigator.userAgent;
+            if (ua.indexOf('Weibo') > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function isMobile() {
+            if (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|XiaoMi|IEMobile)/i)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function showDianji() {
+            $("#public-web-jump-button").html("点击立即前往微信小程序");
+            $("#dianjiimg").show();
+            clearTimeout(dianji);
+        }
+    </script>
+</body>
+
+</html>

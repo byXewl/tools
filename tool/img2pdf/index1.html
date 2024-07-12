@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转PDF</title>
+    <style>
+        body::-webkit-scrollbar {
+            display: none
+        }
+
+
+        #myFrame {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: fixed;
+            width: 100%;
+            background: #fafafa;
+            z-index: 9999;
+        }
+
+        #topOverlay {
+            top: 0;
+            left: 0;
+            height: 12%;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            /* For devices with screen width >= 768px (computers) */
+            #topOverlay {
+                height: 14%;
+            }
+        }
+
+        #bottomOverlay {
+            bottom: 0;
+            left: 0;
+            height: 16%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="topOverlay"></div>
+    <div class="overlay" id="bottomOverlay">
+        <br>
+        <center>
+            多图转PDF:
+            <br> 手机端上传图片可多选的浏览器：火狐浏览器、QQ、华为、小米、三星浏览器等;
+            <br>
+            <br>
+        </center>
+    </div>
+    <iframe id="myFrame" src="https://ol.woobx.cn/tool/img2pdf" frameborder="0"></iframe>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.style.overflow = 'hidden';
+        });
+    </script>
+</body>
+
+</html>
