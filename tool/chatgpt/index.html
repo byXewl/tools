@@ -1353,6 +1353,7 @@
                     <div class="presetSelect presetModelCls">
                         <label for="preSetModel">GPT模型</label>
                         <select id="preSetModel">
+                            <option value="llama3.1:8b">llama3.1:8b</option>
                             <option value="gpt-3.5-turbo">gpt-3.5</option>
                             <option value="gpt-4">gpt-4</option>
                             <option value="gpt-4-32k">gpt-4-32k</option>
@@ -1368,9 +1369,9 @@
                         <input class="inputTextClass"
                             value="示例key:sk-lookyt-chatgpt-api-key,若key过期了可提醒小程序客服更新哦,最新免费key请访问微信小程序：look云图。更多key或登录账号可以联系小程序客服或微信:byxewl"
                             placeholder="" id="qq">
-                        <!--<input class="inputTextClass" value="https://api.1re.ren/"-->
-                        <!--    placeholder="https://api.1re.ren/" id="apiHostInput">-->
-                        <!-- <div>代理接口(若自定义尾部不带/)</div> -->
+                        <input class="inputTextClass" value="https://api.1re.ren/"
+                           placeholder="https://api.1re.ren/" id="apiHostInput">
+                        <div>代理接口(若自定义尾部不带/)</div>
                         <input hidden class="inputTextClass" value="https://api.1re.ren/"
                             placeholder="https://api.1re.ren/" id="apiHostInput">
                     </div>
@@ -2316,7 +2317,7 @@
     <script>
 
         // $('#setting').trigger("click");
-        const API_URL = "v1/chat/completions";
+        const API_URL = "/api/generate";
         let loading = false;
         let presetRoleData = {
             "normal": "你是一个乐于助人的助手，尽量简明扼要地回答",

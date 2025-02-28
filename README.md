@@ -6,6 +6,8 @@ by Xe
 
 以下工具大部分本地运行：
 
+mbti：mbti测试
+
 gqtx：国庆头像生成 
 
 
