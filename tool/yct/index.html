@@ -2,39 +2,142 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隐藏图制作</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>look云图小程序-幻影图制作</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <style>
+    a:hover {
+      text-decoration: none !important;
+    }
 
-    <style>
-        a {
-            text-decoration: none;
-        }
+    .row-center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
+    #image-container img {
+      width: 45%;
+    }
 
-        /* body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        } */
-    </style>
+    #output {
+      max-width: 100%;
+    }
+  </style>
 </head>
 
 <body class="container-fluid">
 
+  <br>
+  <center><b>首页</b></center>
+  <br>
+  <hr>
+ 
+    <div>
+      <br>1.请使用手机或电脑自带的浏览器访问确保能保存png图片<br> (推荐：手机自带浏览器、手机火狐浏览器、手机edge浏览器。不推荐：手机夸克、手机UC、手机QQ浏览器等)
+      <br><br>2.先选择表面图，再选择里面图，点击渲染即可
+      <br><br>3.请勿用于制作违规、吓人的图!!!
+      <br><br>4.斗图隐藏图交流抖音群：<a href="./dy.jpg">313132033043</a> 更多成品隐藏图大全微信小程序：look云图
+      
+    </div>
+ 
+  <hr>
+  <br><center><img src="./lookyt.jpg" style="height: 100px;"></center>
+  <br>
+  <center><b>look云图小程序-幻影图制作</b></center>
+  <br>
+  <hr>
+  <form>
+    <div class="row-center-container">
+      <div>
+        <div class="form-group">
+          <label for="foreground">表图</label>
+          <input type="file" name="foreground" id="foreground" accept="image/*" />
+        </div>
 
-    <br>1.请使用手机或电脑自带的浏览器访问确保能保存png图片<br> (推荐：手机自带浏览器、手机火狐浏览器、手机edge浏览器。不推荐：手机夸克、手机UC、手机QQ浏览器等)
-    <br><br>2.网站加载完成也请等待本地加载完成<br> (本地加载完成后选择图片即可预览,点击渲染制作,保存点击渲染出来的图片或长按图片保存)
-    <br><br>3.请勿用于制作违规、吓人的图!!!
-    <br><br>4.斗图隐藏图交流抖音群：<a href="./dy.jpg">313132033043</a> 更多成品图片微信小程序:look云图
-    <br>
-    <hr>
-    <br>
+        <div class="form-group">
+          <label for="foreground-light">亮度比例</label>
+          <input type="number" name="foreground-light" id="foreground-light" value="1.0" />
+        </div>
 
-    <br>
-    <iframe src="https://nugine.github.io/mirage-tank-wasm-app/" frameborder="0" width="100%" height="2000rpx"
-        scrolling="no"></iframe>
+        <div class="form-group">
+          <label for="foreground-color">色彩比例</label>
+          <input type="number" name="foreground-color" id="foreground-color" value="0.5" />
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label for="background">里图</label>
+          <input type="file" name="background" id="background" accept="image/*" />
+        </div>
 
+        <div class="form-group">
+          <label for="background-light">亮度比例</label>
+          <input type="number" name="background-light" id="background-light" value="0.2" />
+        </div>
+        <div class="form-group">
+          <label for="background-color">色彩比例</label>
+          <input type="number" name="background-color" id="background-color" value="0.7" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="width-input">宽度</label>
+      <input type="number" class="form-control" id="width-input" value="300" />
+    </div>
+    <div class="form-group">
+      <label for="height-input">高度</label>
+      <input type="number" class="form-control" id="height-input" value="300" />
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" id="is-checkerboarded" />
+        棋盘格渲染
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" id="is-colorful" checked />
+        彩色输出
+      </label>
+    </div>
+    <div class="form-group">
+      <center>
+        <button id="renderBtn" class="btn btn-default" type="button">
+          渲染
+        </button>
+        <button id="lightBtn" class="btn btn-default" type="button">
+          关灯(看里图)
+        </button>
+      </center>
+    </div>
+  </form>
+
+  <div>
+    <div id="image-container" class="row-center-container">
+      <img id="foreground-image" />
+      <img id="background-image" />
+    </div>
+    <div id="outBox">
+      <center>
+        <a id="download" target="_blank" download="look云图.png"><br>渲染生成后 点击或长按保存⬇<br><img id="output" /></a>
+      </center>
+    </div>
+  </div>
+
+
+  <br><br><br><br><br><br>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <script src="./bootstrap.js"></script>
 </body>
 
 </html>
