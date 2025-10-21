@@ -35,17 +35,18 @@
   <center><b>首页</b></center>
   <br>
   <hr>
- 
-    <div>
-      <br>1.请使用手机或电脑自带的浏览器访问确保能保存png图片<br> (推荐：手机自带浏览器、手机火狐浏览器、手机edge浏览器。不推荐：手机夸克、手机UC、手机QQ浏览器等)
-      <br><br>2.先选择表面图，再选择里面图，点击渲染即可
-      <br><br>3.请勿用于制作违规、吓人的图!!!
-      <br><br>4.斗图隐藏图交流抖音群：<a href="./dy.jpg">313132033043</a> 更多成品隐藏图大全微信小程序：look云图
-      
-    </div>
- 
+
+  <div>
+    <br>1.请使用手机或电脑自带的浏览器访问确保能保存png图片<br> (推荐：手机自带浏览器、手机火狐浏览器、手机edge浏览器。不推荐：手机夸克、手机UC、手机QQ浏览器等)
+    <br><br>2.先选择表面图，再选择里面图，点击渲染即可
+    <br><br>3.请勿用于制作违规、吓人的图!!!
+    <br><br>4.斗图隐藏图交流抖音群：<a href="./dy.jpg">313132033043</a> 更多成品隐藏图大全微信小程序：look云图
+
+  </div>
+
   <hr>
-  <br><center><img src="./lookyt.jpg" style="height: 100px;"></center>
+  <br>
+  <center><img src="./lookyt.jpg" style="height: 100px;"></center>
   <br>
   <center><b>look云图小程序-隐藏图制作</b></center>
   <br>
@@ -148,26 +149,35 @@
         alert('请先选择两张图片，并点击渲染合成');
         return;
       }
-    
+
       const canvas = document.createElement('canvas');
-      const ctx    = canvas.getContext('2d');
-    
+      
+      // 跳转保存
+      const url = canvas.toDataURL('image/png');
+      const tab = window.open('', '_blank');
+      tab.document.write(`<img src="${url}" style="width:100%">`);
+      tab.document.title = '长按图片即可保存';
+
+
+      // 一般保存
+      const ctx = canvas.getContext('2d');
+
       // 等比例保持原尺寸
-      canvas.width  = img.naturalWidth  || img.width;
+      canvas.width = img.naturalWidth || img.width;
       canvas.height = img.naturalHeight || img.height;
-    
+
       // 跨域支持（如不需要可删掉）
       if (img.crossOrigin) canvas.crossOrigin = img.crossOrigin;
-    
+
       img.onload = () => {
         ctx.drawImage(img, 0, 0);
         canvas.toBlob(blob => {
           if (!blob) return;
-    
+
           // 创建临时下载链接
-          const url  = URL.createObjectURL(blob);
-          const a    = document.createElement('a');
-          a.href     = url;
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
           a.download = 'look云图.png';   // 默认文件名
           document.body.appendChild(a);
           a.click();
@@ -175,14 +185,14 @@
           URL.revokeObjectURL(url);   // 释放内存
         }, 'image/png');
       };
-    
+
       // 如果图片已经缓存，onload 可能不会再触发，手动触发一次
       if (img.complete) img.onload();
     }
-    
+
     /* 绑定按钮 */
     document.getElementById('btnSave').addEventListener('click', saveImage);
-    </script>
+  </script>
 </body>
 
 </html>
