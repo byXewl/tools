@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="ollama本地接口，实现简单HTML网页版在线聊天">
+<meta name="description" content="OpenAI国内接口，实现简单HTML网页版在线聊天">
 <meta name="keywords" content="ChatGPT,ChatGPT中文网,OpenAi,ai智能">
 
 <head>
     <meta charset="utf-8">
-    <title>Ollama</title>
+    <title>ChatGPT在线版</title>
     <style>
         * {
             box-sizing: border-box;
@@ -1277,7 +1277,7 @@
     </div>
     <div id="loadMask">
         <div>
-            <div>若长时间加载，考虑代码错误</div>
+            <div>OpenAI国内接口：若长时间加载请换一个浏览器</div>
             <svg>
                 <use xlink:href="#loadingIcon"></use>
             </svg>
@@ -1328,7 +1328,7 @@
                 <div class="button minimize"></div>
                 <div class="button maximize"></div>
             </div>
-            <div class="title">Ollama</div>
+            <div class="title">ChatGPT Online</div>
             <button id="setting">
                 <svg viewbox="0 0 100 100" style="display:block;" role="img" width="30" height="30">
                     <title>设置</title>
@@ -1347,28 +1347,26 @@
 
                     <div>
                         <p>提示：<font style="color:red;font-weight:bold;">
-                                请先运行ollama本地模型！<br>
-                            </font>
+                                请勿提问一切有关政治、军事、外交等问题，防止不必要麻烦哦，谢谢！每个公共key官方一天有时间次数限制，如果限制了请换一个key哦！</font>
                         </p>
-                        <textarea class="inputTextClass areaTextClass" placeholder="">cmd先执行命令:set OLLAMA_ORIGINS=* 全网卡:set OLLAMA_HOST=0.0.0.0:11434 启动监听:ollama serve </textarea>
                     </div>
                     <div class="presetSelect presetModelCls">
                         <label for="preSetModel">GPT模型</label>
                         <select id="preSetModel">
-                            <option value="llama3.1:8b">llama3.1:8b</option>
-                            <option value="llama3.1:8b">暂无更多</option>
-                            <!-- <option value="gpt-4-32k">gpt-4-32k</option> -->
+                            <option value="gpt-3.5-turbo">gpt-3.5</option>
+                            <option value="gpt-4">gpt-4</option>
+                            <option value="gpt-4-32k">gpt-4-32k</option>
                         </select>
                     </div>
 
                     <div>
-                        <!-- <div>API key（填入仅存储本地用于对话消耗）</div> -->
-                        <input hidden class="inputTextClass" type="text" placeholder="sk-xxxxxx" id="keyInput">
+                        <div>API key（填入仅存储本地用于对话消耗）</div>
+                        <input class="inputTextClass" type="text" placeholder="sk-xxxxxx" id="keyInput">
                     </div>
                     <div>
-                        <!-- <div>我没K？(API key)</div> -->
-                        <input hidden class="inputTextClass"
-                            value="示例key:sk-lookyt-chatgpt-api-key,若key过期了可提醒小程序客服更新哦,最新免费key请访问微信小程序:look云图。更多key或登录账号可以联系小程序客服或微信:byxewl"
+                        <div>我没K？(API key)</div>
+                        <input class="inputTextClass"
+                            value="示例key:sk-lookyt-chatgpt-api-key,若key过期了可提醒小程序客服更新哦,最新免费key请访问微信小程序：look云图。更多key或登录账号可以联系小程序客服或微信:byxewl"
                             placeholder="" id="qq">
                         <!--<input class="inputTextClass" value="https://api.1re.ren/"-->
                         <!--    placeholder="https://api.1re.ren/" id="apiHostInput">-->
@@ -2318,9 +2316,8 @@
     <script>
 
         // $('#setting').trigger("click");
-        const API_URL = 'http://localhost:11434/api/generate';   // ← 唯一地址
+        const API_URL = "v1/chat/completions";
         let loading = false;
-    
         let presetRoleData = {
             "normal": "你是一个乐于助人的助手，尽量简明扼要地回答",
             "cat": "你是一个可爱的猫娘，每句话结尾都要带个'喵'",
@@ -2341,11 +2338,6 @@
         let voiceIns; // Audio or SpeechSynthesisUtterance
         let supportMSE = !!window.MediaSource; // 是否支持MSE（除了ios应该都支持）
         let voiceMIME = "audio/mpeg";
-
-
-
-
-
         const scrollToBottom = () => {
             if (messagsEle.scrollHeight - messagsEle.scrollTop - messagsEle.clientHeight < 128) {
                 messagsEle.scrollTo(0, messagsEle.scrollHeight)
@@ -3429,247 +3421,147 @@
         let refreshIdx;
         let currentResEle;
         let progressData = "";
-
-        
-        /* ---------- 新增：Ollama 流式解析器 ---------- */
-        async function* readOllamaStream(reader, decoder) {
-            let buf = '';
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                buf += decoder.decode(value, { stream: true });
-                let lines = buf.split('\n');
-                buf = lines.pop();          // 最后一行可能不完整，留到下一轮
-                for (const l of lines) {
-                    if (!l.trim()) continue;
-                    try { yield JSON.parse(l); } catch (e) { }
-                }
-            }
-        }
-
-        /* ---------- 核心：发消息 ---------- */
-        async function streamGen(long) {
+        const streamGen = async (long) => {
             controller = new AbortController();
             controllerId = setTimeout(() => {
-                notyf.error('请求超时，请确认本地 ollama 已运行！');
+                notyf.error("请求超时，请稍后重试！");
                 stopLoading();
             }, 30000);
-
-            const isRefresh = refreshIdx !== undefined;
+            let headers = { "Content-Type": "application/json" };
+            if (customAPIKey) headers["Authorization"] = "Bearer " + customAPIKey;
+            let isRefresh = refreshIdx !== void 0;
             if (isRefresh) {
                 currentResEle = chatlog.children[systemRole ? refreshIdx - 1 : refreshIdx];
             } else if (!currentResEle) {
-                currentResEle = createConvEle('response');
-                currentResEle.children[0].innerHTML = '<br />';
+                currentResEle = createConvEle("response");
+                currentResEle.children[0].innerHTML = "<br />";
                 currentResEle.dataset.loading = true;
                 scrollToBottom();
             }
-
-            /* 构造 Ollama 所需 prompt */
-            let prompt = '';
-            const idx = isRefresh ? refreshIdx : data.length;
-            const dataSlice = enableCont ? data.slice(0, idx) : [data[idx - 1]];
-            if (systemRole) dataSlice.unshift({ role: 'system', content: systemRole });
-            dataSlice.forEach(m => { prompt += m.role + ': ' + m.content + '\n'; });
-            prompt += 'assistant: ';      // 让模型接着续写
-
-            // const body = {
-            //     model: modelVersion || 'llama3.1:8b',   // 本地模型名，跟 ollama list 保持一致
-            //     prompt: prompt,
-            //     stream: true,
-            //     options: {
-            //         temperature: roleTemp ?? 0.8,
-            //         top_p: roleNature ?? 0.9
-            //     }
-            // };
-            const body = {
-                model: 'llama3.1:8b',   // 本地模型名，跟 ollama list 保持一致
-                prompt: prompt,
-                stream: true,
-                options: {
-                    temperature: roleTemp ?? 0.8,
-                    top_p: roleNature ?? 0.9
+            let idx = isRefresh ? refreshIdx : data.length;
+            if (existVoice && enableAutoVoice && !long) {
+                if (isRefresh) {
+                    endSpeak();
+                    autoVoiceDataIdx = currentVoiceIdx = idx;
+                } else if (currentVoiceIdx !== data.length) {
+                    endSpeak();
+                    autoVoiceDataIdx = currentVoiceIdx = idx;
                 }
-            };
-
+            }
+            let dataSlice;
+            if (long) {
+                idx = isRefresh ? refreshIdx : data.length - 1;
+                dataSlice = [data[idx - 1], data[idx]];
+                if (systemRole) { dataSlice.unshift(data[0]); }
+            } else if (enableCont) {
+                dataSlice = data.slice(0, idx);
+            } else {
+                dataSlice = [data[idx - 1]];
+                if (systemRole) { dataSlice.unshift(data[0]); }
+            }
             try {
-                const res = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body),
+                const res = await fetch(apiHost + API_URL, {
+                    method: "POST",
+                    headers,
+                    body: JSON.stringify({
+                        messages: dataSlice,
+                        model: modelVersion,
+                        stream: true,
+                        temperature: roleTemp,
+                        top_p: roleNature
+                    }),
                     signal: controller.signal
                 });
-                clearTimeout(controllerId); controllerId = null;
-                if (!res.ok) { notyf.error('Ollama 返回 ' + res.status); stopLoading(); return; }
-
-                const reader = res.body.getReader();
-                const decoder = new TextDecoder();
-                for await (const pkt of readOllamaStream(reader, decoder)) {
-                    if (pkt.response) {               // 每次增量文本
-                        if (progressData) await delay();
-                        progressData += pkt.response;
-                        currentResEle.children[0].innerHTML = md.render(progressData) || '<br />';
-                        if (!isRefresh) scrollToBottom();
+                clearTimeout(controllerId);
+                controllerId = void 0;
+                if (res.status !== 200) {
+                    if (res.status === 401) {
+                        notyf.error("API key错误或失效，请检查API key！")
+                    } else if (res.status === 400) {
+                        notyf.error("请求内容过大，请删除部分对话或打开设置关闭连续对话！");
+                    } else if (res.status === 404) {
+                        notyf.error("无权使用此模型，请打开设置选择其他GPT模型！");
+                    } else if (res.status === 429) {
+                        notyf.error(res.statusText ? "触发API调用频率限制，请稍后重试！" : "API使用超出限额，请检查您的账单！");
+                    } else {
+                        notyf.error("网关错误或超时，请稍后重试！");
                     }
-                    if (pkt.done) {                   // 流结束
-                        if (isRefresh) { data[refreshIdx].content = progressData; }
-                        else { data.push({ role: 'assistant', content: progressData }); }
-                        stopLoading(false);
-                        return;
-                    }
+                    stopLoading();
+                    return;
                 }
+                const decoder = new TextDecoder();
+                const reader = res.body.getReader();
+                const readChunk = async () => {
+                    return reader.read().then(async ({ value, done }) => {
+                        if (!done) {
+                            value = decoder.decode(value);
+                            let chunks = value.split(/\n{2}/g);
+                            chunks = chunks.filter(item => {
+                                return item.trim();
+                            });
+                            for (let i = 0; i < chunks.length; i++) {
+                                let chunk = chunks[i];
+                                if (chunk) {
+                                    let payload;
+                                    try {
+                                        payload = JSON.parse(chunk.slice(6));
+                                    } catch (e) {
+                                        break;
+                                    }
+                                    if (payload.choices[0].finish_reason) {
+                                        let lenStop = payload.choices[0].finish_reason === "length";
+                                        let longReplyFlag = enableLongReply && lenStop;
+                                        if (!enableLongReply && lenStop) { currentResEle.children[1].children[0].className = "halfRefReq" }
+                                        else { currentResEle.children[1].children[0].className = "refreshReq" };
+                                        if (existVoice && enableAutoVoice && currentVoiceIdx === autoVoiceDataIdx) {
+                                            let voiceText = longReplyFlag ? "" : progressData.slice(autoVoiceIdx), stop = !longReplyFlag;
+                                            autoSpeechEvent(voiceText, currentResEle, false, stop);
+                                        }
+                                        break;
+                                    } else {
+                                        let content = payload.choices[0].delta.content;
+                                        if (content) {
+                                            if (!progressData && !content.trim()) continue;
+                                            if (existVoice && enableAutoVoice && currentVoiceIdx === autoVoiceDataIdx) {
+                                                let spliter = content.match(/\.|\?|!|。|？|！|\n/);
+                                                if (spliter) {
+                                                    let voiceText = progressData.slice(autoVoiceIdx) + content.slice(0, spliter.index + 1);
+                                                    autoVoiceIdx += voiceText.length;
+                                                    autoSpeechEvent(voiceText, currentResEle);
+                                                }
+                                            }
+                                            if (progressData) await delay();
+                                            progressData += content;
+                                            currentResEle.children[0].innerHTML = md.render(progressData);
+                                            if (!isRefresh) {
+                                                scrollToBottom();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            return readChunk();
+                        } else {
+                            if (isRefresh) {
+                                data[refreshIdx].content = progressData;
+                                if (longReplyFlag) return streamGen(true);
+                            } else {
+                                if (long) { data[data.length - 1].content = progressData }
+                                else { data.push({ role: "assistant", content: progressData }) }
+                                if (longReplyFlag) return streamGen(true);
+                            }
+                            stopLoading(false);
+                        }
+                    });
+                };
+                await readChunk();
             } catch (e) {
-                if (e.name !== 'AbortError') { notyf.error('网络错误：' + e.message); stopLoading(); }
+                if (e.message.indexOf("aborted") === -1) {
+                    notyf.error("访问接口失败，请检查接口！")
+                    stopLoading();
+                }
             }
-        }
-
-
-        /* ---------- 其余函数保持原样 ---------- */
-   
-
-
-
-        // const streamGen = async (long) => {
-        //     controller = new AbortController();
-        //     controllerId = setTimeout(() => {
-        //         notyf.error("请求超时，请稍后重试！");
-        //         stopLoading();
-        //     }, 30000);
-        //     let headers = { "Content-Type": "application/json" };
-        //     if (customAPIKey) headers["Authorization"] = "Bearer " + customAPIKey;
-        //     let isRefresh = refreshIdx !== void 0;
-        //     if (isRefresh) {
-        //         currentResEle = chatlog.children[systemRole ? refreshIdx - 1 : refreshIdx];
-        //     } else if (!currentResEle) {
-        //         currentResEle = createConvEle("response");
-        //         currentResEle.children[0].innerHTML = "<br />";
-        //         currentResEle.dataset.loading = true;
-        //         scrollToBottom();
-        //     }
-        //     let idx = isRefresh ? refreshIdx : data.length;
-        //     if (existVoice && enableAutoVoice && !long) {
-        //         if (isRefresh) {
-        //             endSpeak();
-        //             autoVoiceDataIdx = currentVoiceIdx = idx;
-        //         } else if (currentVoiceIdx !== data.length) {
-        //             endSpeak();
-        //             autoVoiceDataIdx = currentVoiceIdx = idx;
-        //         }
-        //     }
-        //     let dataSlice;
-        //     if (long) {
-        //         idx = isRefresh ? refreshIdx : data.length - 1;
-        //         dataSlice = [data[idx - 1], data[idx]];
-        //         if (systemRole) { dataSlice.unshift(data[0]); }
-        //     } else if (enableCont) {
-        //         dataSlice = data.slice(0, idx);
-        //     } else {
-        //         dataSlice = [data[idx - 1]];
-        //         if (systemRole) { dataSlice.unshift(data[0]); }
-        //     }
-        //     try {
-        //         const res = await fetch(apiHost + API_URL, {
-        //             method: "POST",
-        //             headers,
-        //             body: JSON.stringify({
-        //                 messages: dataSlice,
-        //                 model: modelVersion,
-        //                 stream: true,
-        //                 temperature: roleTemp,
-        //                 top_p: roleNature
-        //             }),
-        //             signal: controller.signal
-        //         });
-        //         clearTimeout(controllerId);
-        //         controllerId = void 0;
-        //         if (res.status !== 200) {
-        //             if (res.status === 401) {
-        //                 notyf.error("API key错误或失效，请检查API key！")
-        //             } else if (res.status === 400) {
-        //                 notyf.error("请求内容过大，请删除部分对话或打开设置关闭连续对话！");
-        //             } else if (res.status === 404) {
-        //                 notyf.error("无权使用此模型，请打开设置选择其他GPT模型！");
-        //             } else if (res.status === 429) {
-        //                 notyf.error(res.statusText ? "触发API调用频率限制，请稍后重试！" : "API使用超出限额，请检查您的账单！");
-        //             } else {
-        //                 notyf.error("网关错误或超时，请稍后重试！");
-        //             }
-        //             stopLoading();
-        //             return;
-        //         }
-        //         const decoder = new TextDecoder();
-        //         const reader = res.body.getReader();
-        //         const readChunk = async () => {
-        //             return reader.read().then(async ({ value, done }) => {
-        //                 if (!done) {
-        //                     value = decoder.decode(value);
-        //                     let chunks = value.split(/\n{2}/g);
-        //                     chunks = chunks.filter(item => {
-        //                         return item.trim();
-        //                     });
-        //                     for (let i = 0; i < chunks.length; i++) {
-        //                         let chunk = chunks[i];
-        //                         if (chunk) {
-        //                             let payload;
-        //                             try {
-        //                                 payload = JSON.parse(chunk.slice(6));
-        //                             } catch (e) {
-        //                                 break;
-        //                             }
-        //                             if (payload.choices[0].finish_reason) {
-        //                                 let lenStop = payload.choices[0].finish_reason === "length";
-        //                                 let longReplyFlag = enableLongReply && lenStop;
-        //                                 if (!enableLongReply && lenStop) { currentResEle.children[1].children[0].className = "halfRefReq" }
-        //                                 else { currentResEle.children[1].children[0].className = "refreshReq" };
-        //                                 if (existVoice && enableAutoVoice && currentVoiceIdx === autoVoiceDataIdx) {
-        //                                     let voiceText = longReplyFlag ? "" : progressData.slice(autoVoiceIdx), stop = !longReplyFlag;
-        //                                     autoSpeechEvent(voiceText, currentResEle, false, stop);
-        //                                 }
-        //                                 break;
-        //                             } else {
-        //                                 let content = payload.choices[0].delta.content;
-        //                                 if (content) {
-        //                                     if (!progressData && !content.trim()) continue;
-        //                                     if (existVoice && enableAutoVoice && currentVoiceIdx === autoVoiceDataIdx) {
-        //                                         let spliter = content.match(/\.|\?|!|。|？|！|\n/);
-        //                                         if (spliter) {
-        //                                             let voiceText = progressData.slice(autoVoiceIdx) + content.slice(0, spliter.index + 1);
-        //                                             autoVoiceIdx += voiceText.length;
-        //                                             autoSpeechEvent(voiceText, currentResEle);
-        //                                         }
-        //                                     }
-        //                                     if (progressData) await delay();
-        //                                     progressData += content;
-        //                                     currentResEle.children[0].innerHTML = md.render(progressData);
-        //                                     if (!isRefresh) {
-        //                                         scrollToBottom();
-        //                                     }
-        //                                 }
-        //                             }
-        //                         }
-        //                     }
-        //                     return readChunk();
-        //                 } else {
-        //                     if (isRefresh) {
-        //                         data[refreshIdx].content = progressData;
-        //                         if (longReplyFlag) return streamGen(true);
-        //                     } else {
-        //                         if (long) { data[data.length - 1].content = progressData }
-        //                         else { data.push({ role: "assistant", content: progressData }) }
-        //                         if (longReplyFlag) return streamGen(true);
-        //                     }
-        //                     stopLoading(false);
-        //                 }
-        //             });
-        //         };
-        //         await readChunk();
-        //     } catch (e) {
-        //         if (e.message.indexOf("aborted") === -1) {
-        //             notyf.error("访问接口失败，请检查接口！")
-        //             stopLoading();
-        //         }
-        //     }
-        // };
+        };
         const loadAction = (bool) => {
             loading = bool;
             sendBtnEle.disabled = bool;
@@ -3716,11 +3608,7 @@
             await streamGen();
         };
         textarea.onkeydown = (e) => {
-            // if (e.keyCode === 13 && !e.shiftKey) {
-            //     e.preventDefault();
-            //     genFunc();
-            // }
-            if (e.keyCode === 13 && e.ctrlKey) {
+            if (e.keyCode === 13 && !e.shiftKey) {
                 e.preventDefault();
                 genFunc();
             }
